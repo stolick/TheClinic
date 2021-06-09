@@ -15,6 +15,7 @@ public class Doctor extends AbstractEntity<DoctorId> {
 
     private String name;
 
+    @ElementCollection
     private List<Language> languages;
 
     private Gender gender;

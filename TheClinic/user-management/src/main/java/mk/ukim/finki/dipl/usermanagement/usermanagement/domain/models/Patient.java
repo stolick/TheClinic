@@ -26,14 +26,6 @@ public class Patient extends AbstractEntity<PatientId> {
         super(PatientId.randomId(PatientId.class));
     }
 
-//    public static Patient create(String name, Gender gender, EMBG embg){
-//        Patient patient = new Patient();
-//        patient.name = name;
-//        patient.gender = gender;
-//        patient.embg = embg;
-//        return patient;
-//    }
-
     public static Patient create(User user){
         Patient patient = new Patient();
         patient.user = user;

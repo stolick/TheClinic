@@ -1,8 +1,6 @@
 package mk.ukim.finki.dipl.usermanagement.usermanagement.xport.rest;
 
-
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.exceptions.RoleNotFoundException;
-import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.Patient;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.Role;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.User;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.enums.ERole;
@@ -84,7 +82,6 @@ public class AuthController {
                     .body(new MessageResponse("Error: Username is already taken!"));
         }
 
-        // Create new user's account
         User user = new User(registerRequest.getUsername(),
                 encoder.encode(registerRequest.getPassword()));
 
@@ -121,12 +118,12 @@ public class AuthController {
         user.setRoles(roles);
         userRepository.save(user);
 
-        user.getRoles().stream().forEach(role ->{
+        user.getRoles().stream().forEach(role -> {
             if (role.getName() == ERole.ROLE_DOCTOR){
                 doctorService.createDoctor(user);
-            }else if(role.getName() == ERole.ROlE_PATIENT){
+            } else if(role.getName() == ERole.ROlE_PATIENT){
                 patientService.createPatient(user);
-            }else{
+            } else{
                 throw new RoleNotFoundException();
             }
         });

@@ -5,7 +5,6 @@ import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.Patient;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.User;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.repository.PatientRepository;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.service.PatientService;
-import mk.ukim.finki.dipl.usermanagement.usermanagement.service.form.PatientForm;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
