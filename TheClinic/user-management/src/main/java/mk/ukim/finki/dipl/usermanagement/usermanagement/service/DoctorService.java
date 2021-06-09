@@ -1,9 +1,8 @@
 package mk.ukim.finki.dipl.usermanagement.usermanagement.service;
 
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.Doctor;
-import mk.ukim.finki.dipl.usermanagement.usermanagement.service.form.DoctorForm;
+import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.User;
 
 public interface DoctorService {
-    public Doctor createDoctor(DoctorForm doctorForm);
-
+    Doctor createDoctor(User user);
 }

@@ -1,11 +1,15 @@
 package mk.ukim.finki.dipl.usermanagement.usermanagement.xport.rest;
 
 
+import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.exceptions.RoleNotFoundException;
+import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.Patient;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.Role;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.User;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.enums.ERole;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.repository.RoleRepository;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.repository.UserRepository;
+import mk.ukim.finki.dipl.usermanagement.usermanagement.service.DoctorService;
+import mk.ukim.finki.dipl.usermanagement.usermanagement.service.PatientService;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.service.security.jwt.JwtUtils;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.service.security.services.UserDetailsImpl;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.xport.dto.request.LoginRequest;
@@ -45,6 +49,12 @@ public class AuthController {
 
     @Autowired
     JwtUtils jwtUtils;
+
+    @Autowired
+    DoctorService doctorService;
+
+    @Autowired
+    PatientService patientService;
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -109,13 +119,21 @@ public class AuthController {
         }
 
         user.setRoles(roles);
-        user.getRoles().stream().forEach(role -> {
-            if (role.getName() == ERole.ROLE_DOCTOR){
+        userRepository.save(user);
 
+        user.getRoles().stream().forEach(role ->{
+            if (role.getName() == ERole.ROLE_DOCTOR){
+                doctorService.createDoctor(user);
+            }else if(role.getName() == ERole.ROlE_PATIENT){
+                patientService.createPatient(user);
+            }else{
+                throw new RoleNotFoundException();
             }
         });
-        userRepository.save(user);
+
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
+
+
 }

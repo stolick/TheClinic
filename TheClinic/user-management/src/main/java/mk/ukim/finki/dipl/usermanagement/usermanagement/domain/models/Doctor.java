@@ -5,8 +5,7 @@ import mk.finki.ukim.dipl.sharedkernel.sharedkernel.domain.base.AbstractEntity;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.enums.Gender;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.enums.Language;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -20,16 +19,17 @@ public class Doctor extends AbstractEntity<DoctorId> {
 
     private Gender gender;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     private Doctor(){
         super(DoctorId.randomId(DoctorId.class));
     }
 
-    public static Doctor create(String name, List<Language> languages, Gender gender){
+    public static Doctor create(User user){
         Doctor doctor = new Doctor();
-        doctor.name = name;
-        doctor.languages = languages;
-        doctor.gender = gender;
+        doctor.user = user;
         return doctor;
     }
-
 }
