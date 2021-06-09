@@ -6,6 +6,7 @@ import mk.ukim.finki.dipl.programmanagement.programmanagement.domain.valueobject
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,17 +16,20 @@ public class Program extends AbstractEntity<ProgramId> {
 
     private String programName;
 
+    private String programDescription;
+
     private ProgramDuration duration;
 
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<Room> roomList = new HashSet<>();
-
-    //TODO In the same context, Program is aggregate root, check this
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private Department department;
+    private Set<Room> rooms = new HashSet<>();
 
     private Program(){
         super(ProgramId.randomId(ProgramId.class));
+    }
+
+    public List<Room> assignRooms(List<Room> roomsList){
+        Set<Room> roomsToAssign = new HashSet<>(roomsList);
+        rooms = roomsToAssign;
+        return roomsList;
     }
 }
