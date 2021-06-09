@@ -1,4 +1,4 @@
-package mk.ukim.finki.dipl.usermanagement.usermanagement.xport;
+package mk.ukim.finki.dipl.usermanagement.usermanagement.xport.rest;
 
 
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.Role;
@@ -109,6 +109,11 @@ public class AuthController {
         }
 
         user.setRoles(roles);
+        user.getRoles().stream().forEach(role -> {
+            if (role.getName() == ERole.ROLE_DOCTOR){
+
+            }
+        });
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

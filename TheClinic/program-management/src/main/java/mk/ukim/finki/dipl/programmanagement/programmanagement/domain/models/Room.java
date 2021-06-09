@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "room")
+@Table(name = "rooms")
 @Getter
 public class Room extends AbstractEntity<RoomId> {
 

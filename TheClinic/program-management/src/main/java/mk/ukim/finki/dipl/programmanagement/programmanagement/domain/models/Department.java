@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "department")
+@Table(name = "departments")
 @Getter
 public class Department extends AbstractEntity<DepartmentId> {
 
@@ -32,7 +32,7 @@ public class Department extends AbstractEntity<DepartmentId> {
 
     public Program addProgram(@NonNull Program program, @NonNull List<Room> rooms){
         Objects.requireNonNull(program, "Program must not be null");
-        Objects.requireNonNull(rooms, "Rooms List must not be null");
+        Objects.requireNonNull(rooms, "Rooms list must not be null");
         program.assignRooms(rooms);
         programs.add(program);
         return program;

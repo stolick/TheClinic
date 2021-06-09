@@ -58,6 +58,11 @@
             <artifactId>hibernate-validator</artifactId>
             <version>6.0.18.Final</version>
         </dependency>
+        <dependency>
+            <groupId>mk.ukim.finki.dipl.shared-kernel</groupId>
+            <artifactId>shared-kernel</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

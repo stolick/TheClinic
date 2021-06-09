@@ -9,7 +9,6 @@ import mk.ukim.finki.dipl.programmanagement.programmanagement.service.form.Depar
 import java.util.List;
 
 public interface DepartmentService {
-
     Department findById(DepartmentId id);
     Department createDepartment(DepartmentForm form);
     List<Department> getAll();
