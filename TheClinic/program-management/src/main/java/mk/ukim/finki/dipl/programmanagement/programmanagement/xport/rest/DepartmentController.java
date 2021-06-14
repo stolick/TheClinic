@@ -7,6 +7,9 @@ import mk.ukim.finki.dipl.programmanagement.programmanagement.domain.models.Prog
 import mk.ukim.finki.dipl.programmanagement.programmanagement.domain.models.Room;
 import mk.ukim.finki.dipl.programmanagement.programmanagement.service.DepartmentService;
 import mk.ukim.finki.dipl.programmanagement.programmanagement.service.form.DepartmentForm;
+import mk.ukim.finki.dipl.programmanagement.programmanagement.service.form.ProgramForm;
+import mk.ukim.finki.dipl.programmanagement.programmanagement.service.form.RoomForm;
+import mk.ukim.finki.dipl.programmanagement.programmanagement.xport.rest.dto.ProgramRoomsRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,9 +37,10 @@ public class DepartmentController {
         return departmentService.createDepartment(departmentForm);
     }
 
-    //TODO request body
     @PostMapping("/{departmentId}/program")
-    public Department addProgramToDepartment(@PathVariable DepartmentId departmentId, Program program, List<Room> roomsList){
-        return departmentService.addProgramToDepartment(departmentId, program, roomsList);
+    public Department addProgramToDepartment(@PathVariable DepartmentId departmentId, @RequestBody ProgramRoomsRequest request) {
+        ProgramForm program = request.getProgram();
+        List<RoomForm> rooms = request.getRooms();
+        return departmentService.addProgramToDepartment(departmentId, program, rooms);
     }
 }

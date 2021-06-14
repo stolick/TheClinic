@@ -7,12 +7,17 @@ import mk.ukim.finki.dipl.programmanagement.programmanagement.domain.models.Depa
 import mk.ukim.finki.dipl.programmanagement.programmanagement.domain.models.Program;
 import mk.ukim.finki.dipl.programmanagement.programmanagement.domain.models.Room;
 import mk.ukim.finki.dipl.programmanagement.programmanagement.domain.repository.DepartmentRepository;
+import mk.ukim.finki.dipl.programmanagement.programmanagement.domain.valueobjects.ProgramDuration;
 import mk.ukim.finki.dipl.programmanagement.programmanagement.service.DepartmentService;
 import mk.ukim.finki.dipl.programmanagement.programmanagement.service.form.DepartmentForm;
+import mk.ukim.finki.dipl.programmanagement.programmanagement.service.form.ProgramForm;
+import mk.ukim.finki.dipl.programmanagement.programmanagement.service.form.RoomForm;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.Duration;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -39,9 +44,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department addProgramToDepartment(DepartmentId id, Program program, List<Room> roomsList) {
+    public Department addProgramToDepartment(DepartmentId id, ProgramForm programForm, List<RoomForm> roomsList) {
         Department department = departmentRepository.findById(id).orElseThrow(DepartmentNotFoundException::new);
-        department.addProgram(program, roomsList);
+        ProgramDuration programDuration = new ProgramDuration(Duration.ofSeconds(programForm.getSeconds(), programForm.getNanos()));
+        Program program = Program.build(programForm.getProgramName(), programForm.getProgramDescription(), programDuration);
+        List<Room> rooms = roomsList.stream().map(roomForm -> Room.build(roomForm.getRoomNumber(), roomForm.getFloorNumber())).collect(Collectors.toList());
+        department.addProgram(program, rooms);
         departmentRepository.save(department);
         return department;
     }

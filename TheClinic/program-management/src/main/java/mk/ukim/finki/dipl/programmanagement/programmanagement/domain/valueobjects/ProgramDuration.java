@@ -10,9 +10,13 @@ import java.time.Duration;
 @Getter
 public class ProgramDuration implements ValueObject {
 
-        private Duration duration;
+    private Duration duration;
 
-        protected ProgramDuration(){
-            this.duration = Duration.ZERO;
-        }
+    protected ProgramDuration() {
+        this.duration = Duration.ZERO;
+    }
+
+    public ProgramDuration(Duration duration) {
+        this.duration = duration;
+    }
 }

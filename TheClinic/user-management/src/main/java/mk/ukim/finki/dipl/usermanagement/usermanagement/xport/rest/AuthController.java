@@ -89,7 +89,7 @@ public class AuthController {
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROlE_PATIENT)
+            Role userRole = roleRepository.findByName(ERole.ROLE_PATIENT)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
         } else {
@@ -108,7 +108,7 @@ public class AuthController {
 
                         break;
                     default:
-                        Role userRole = roleRepository.findByName(ERole.ROlE_PATIENT)
+                        Role userRole = roleRepository.findByName(ERole.ROLE_PATIENT)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(userRole);
                 }
@@ -119,11 +119,11 @@ public class AuthController {
         userRepository.save(user);
 
         user.getRoles().stream().forEach(role -> {
-            if (role.getName() == ERole.ROLE_DOCTOR){
+            if (role.getName() == ERole.ROLE_DOCTOR) {
                 doctorService.createDoctor(user);
-            } else if(role.getName() == ERole.ROlE_PATIENT){
+            } else if (role.getName() == ERole.ROLE_PATIENT) {
                 patientService.createPatient(user);
-            } else{
+            } else {
                 throw new RoleNotFoundException();
             }
         });

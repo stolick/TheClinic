@@ -5,12 +5,16 @@ import mk.ukim.finki.dipl.programmanagement.programmanagement.domain.models.Depa
 import mk.ukim.finki.dipl.programmanagement.programmanagement.domain.models.Program;
 import mk.ukim.finki.dipl.programmanagement.programmanagement.domain.models.Room;
 import mk.ukim.finki.dipl.programmanagement.programmanagement.service.form.DepartmentForm;
+import mk.ukim.finki.dipl.programmanagement.programmanagement.service.form.ProgramForm;
+import mk.ukim.finki.dipl.programmanagement.programmanagement.service.form.RoomForm;
 
 import java.util.List;
 
 public interface DepartmentService {
     Department findById(DepartmentId id);
     Department createDepartment(DepartmentForm form);
+
     List<Department> getAll();
-    Department addProgramToDepartment(DepartmentId id, Program program, List<Room> roomsList);
+
+    Department addProgramToDepartment(DepartmentId id, ProgramForm program, List<RoomForm> roomsList);
 }

@@ -20,14 +20,22 @@ public class Program extends AbstractEntity<ProgramId> {
 
     private ProgramDuration duration;
 
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Room> rooms = new HashSet<>();
 
-    private Program(){
+    private Program() {
         super(ProgramId.randomId(ProgramId.class));
     }
 
-    public List<Room> assignRooms(List<Room> roomsList){
+    public static Program build(String programName, String programDescription, ProgramDuration duration) {
+        Program program = new Program();
+        program.programName = programName;
+        program.programDescription = programDescription;
+        program.duration = duration;
+        return program;
+    }
+
+    public List<Room> assignRooms(List<Room> roomsList) {
         Set<Room> roomsToAssign = new HashSet<>(roomsList);
         rooms = roomsToAssign;
         return roomsList;

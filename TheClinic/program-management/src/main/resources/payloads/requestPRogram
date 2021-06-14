@@ -1,0 +1,17 @@
+{
+
+
+ "program":{
+    "programName": "Heart Surgery",
+    "programDescription": "Operacija na srce",
+    "seconds": 3600,
+    "nanos": 0
+},
+    "rooms":
+        [
+            {
+ "roomNumber": 15,
+        "floorNumber": 2
+            }
+        ]
+    }
