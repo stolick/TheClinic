@@ -22,14 +22,14 @@ public class DoctorController {
         return doctorService.getAll();
     }
 
-    @GetMapping("/{doctorId}")
-    public Doctor getDoctor(@PathVariable DoctorId doctorId) {
-        return doctorService.findById(doctorId);
+    @GetMapping("/{username}")
+    public Doctor getDoctor(@PathVariable String username) {
+        return doctorService.findByUser(username);
     }
 
     @PostMapping("/{doctorId}")
     public Doctor updateDoctor(@PathVariable DoctorId doctorId, @RequestBody DoctorRequest doctorRequest) {
-        return doctorService.updateDoctor(doctorId, doctorRequest);
+        return doctorService.updateDoctorProfile(doctorId, doctorRequest);
     }
 
 

@@ -1,0 +1,15 @@
+<div class="row custom-header">
+  <div class="col-8">
+    <h4>Departments</h4>
+  </div>
+  <div class="col-4">
+    Search may be here
+  </div>
+</div>
+<div class="row m-3">
+  <div *ngFor="let department of departments">
+    <div class="col-3 card custom-card">
+      {{department.departmentName}}
+    </div>
+  </div>
+</div>

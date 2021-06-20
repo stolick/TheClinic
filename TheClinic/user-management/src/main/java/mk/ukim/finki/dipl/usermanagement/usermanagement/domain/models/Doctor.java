@@ -1,6 +1,5 @@
 package mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import mk.finki.ukim.dipl.sharedkernel.sharedkernel.domain.base.AbstractEntity;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.enums.Gender;
@@ -26,6 +25,8 @@ public class Doctor extends AbstractEntity<DoctorId> {
     @JoinColumn(name = "user_id")
     private User user;
 
+    private byte[] profilePicture;
+
     private Doctor() {
         super(DoctorId.randomId(DoctorId.class));
     }
@@ -36,10 +37,11 @@ public class Doctor extends AbstractEntity<DoctorId> {
         return doctor;
     }
 
-    public static Doctor change(Doctor doctor, String name, List<Language> languages, Gender gender) {
+    public static Doctor updateDoctorProfile(Doctor doctor, String name, List<Language> languages, Gender gender, byte[] profilePicture) {
         doctor.name = name;
         doctor.languages = languages;
         doctor.gender = gender;
+        doctor.profilePicture = profilePicture;
         return doctor;
     }
 }

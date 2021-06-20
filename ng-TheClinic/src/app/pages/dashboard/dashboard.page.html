@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-2 menu shadow justify-content-between">
+    <div>
+      <div class="greeting">Hello, {{currentUser.username}}</div>
+      <div class="logo"><i class="fas fa-hospital-alt"></i> The Clinic</div>
+      <div (click)="selectedFragment = 'doctors'" class="menu-item" [ngClass]="selectedFragment == 'doctors' ? 'selected-item' : ''"><i class="fas fa-user-md"></i> Doctors</div>
+      <div (click)="selectedFragment = 'departments'" class="menu-item" [ngClass]="selectedFragment == 'departments' ? 'selected-item' : ''"><i class="fas fa-heartbeat"></i> Departments
+      </div>
+      <div (click)="selectedFragment = 'profile'" class="menu-item" [ngClass]="selectedFragment == 'profile' ? 'selected-item' : ''"><i class="fas fa-id-card-alt"></i> Profile</div>
+    </div>
+    <div>
+      <div (click)="logout()" class="menu-item"><i class="fas fa-sign-out-alt"></i> Logout</div>
+    </div>
+  </div>
+  <div class="col-10 fragment">
+    <doctors *ngIf="selectedFragment == 'doctors'"></doctors>
+    <departments *ngIf="selectedFragment == 'departments'"></departments>
+    <profile *ngIf="selectedFragment == 'profile'"></profile>
+  </div>
+</div>

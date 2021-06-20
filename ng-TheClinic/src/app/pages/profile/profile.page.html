@@ -1,0 +1,51 @@
+<div class="row wrapper" [formGroup]="updateUserForm">
+    <div class="col-4 avatar">
+      <div>
+        <input type="file" class="file-input"
+               (change)="onFileSelected($event)" #fileUpload>
+        <img *ngIf="user.profilePicture && !selectedFile" src="user.profilePicture" alt="Profile Picture" class="avatar-image"/>
+        <img *ngIf="selectedFile" src="{{selectedFile}}" alt="Profile Picture" class="avatar-image"/>
+        <img *ngIf="!user.profilePicture && user.gender == 'FEMALE' && !selectedFile" class="avatar-image" src="assets/images/doctorka.jpg"
+             alt="Profile picture"/>
+        <img *ngIf="!user.profilePicture && user.gender == 'MALE' && !selectedFile" class="avatar-image" src="assets/images/doctor.jpg"
+             alt="Profile picture"/>
+        <span (click)="fileUpload.click()" class="badge rounded-pill badge-notification bg-secondary p-2 pointer"><i class="fas fa-plus"></i></span>
+      </div>
+
+      <div class="mt-4">{{user.name}}</div>
+    </div>
+    <div class="col-7">
+      <div class="form-outline mb-4 form-background">
+        <input type="text" value="{{user.name}}" class="form-control"/>
+      </div>
+      <div class="btn-group mb-4 radio-buttons">
+        <input
+          type="radio"
+          class="btn-check"
+          name="options"
+          id="FEMALE"
+          autocomplete="off"
+          formControlName="gender"
+          value="FEMALE"
+        />
+        <label class="btn btn-primary" for="FEMALE">FEMALE</label>
+
+        <input type="radio" class="btn-check" name="options" id="MALE" value="MALE" autocomplete="off"
+               formControlName="gender"/>
+        <label class="btn btn-primary" for="MALE">MALE</label>
+      </div>
+      <div class="btn-group mb-4">
+        <input type="checkbox" class="btn-check" id="EN" autocomplete="off" [checked]="user.languages.toString().includes('EN')"/>
+        <label class="btn btn-primary" for="EN">English</label>
+
+        <input type="checkbox" class="btn-check" id="MK" autocomplete="off" [checked]="user.languages.toString().includes('MK')"/>
+        <label class="btn btn-primary" for="MK">Macedonian</label>
+
+        <input type="checkbox" class="btn-check" id="AL" autocomplete="off" [checked]="user.languages.toString().includes('AL')"/>
+        <label class="btn btn-primary" for="AL">Albanian</label>
+      </div>
+      <div class="mt-5">
+        <button class="btn btn-secondary">Save</button>
+      </div>
+    </div>
+</div>

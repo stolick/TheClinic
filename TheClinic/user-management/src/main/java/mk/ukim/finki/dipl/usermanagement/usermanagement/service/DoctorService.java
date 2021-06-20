@@ -9,9 +9,12 @@ import java.util.List;
 
 public interface DoctorService {
     List<Doctor> getAll();
+
     Doctor createDoctor(User user);
 
     Doctor findById(DoctorId doctorId);
 
-    Doctor updateDoctor(DoctorId doctorId, DoctorRequest doctorRequest);
+    Doctor updateDoctorProfile(DoctorId doctorId, DoctorRequest doctorRequest);
+
+    Doctor findByUser(String username);
 }

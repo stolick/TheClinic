@@ -1,0 +1,44 @@
+$color-primary: rgb(6, 87, 207);
+$color-secondary: rgba(236, 241, 255, 0.66);
+div {
+  padding: 0;
+  margin: 0;
+}
+
+.wrapper{
+  background-color: $color-secondary;
+  height: 100vh;
+  padding: 15% 10%;
+}
+
+.avatar{
+  display: flex;
+  flex-direction: column;
+}
+
+.avatar-image{
+  border-radius: 50px;
+  width: 120px;
+  height: 120px;
+}
+
+.form-background{
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 10px 5px;
+  border-radius: 10px;
+  width: 400px;
+}
+
+.radio-buttons{
+  width: 400px;
+  display: flex;
+  justify-content: center;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.file-input {
+  display: none;
+}

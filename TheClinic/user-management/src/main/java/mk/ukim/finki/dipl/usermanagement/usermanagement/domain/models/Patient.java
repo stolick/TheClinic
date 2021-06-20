@@ -1,5 +1,6 @@
 package mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models;
 
+import javassist.bytecode.ByteArray;
 import lombok.Getter;
 import mk.finki.ukim.dipl.sharedkernel.sharedkernel.domain.base.AbstractEntity;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.enums.Gender;
@@ -7,6 +8,7 @@ import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.enums.Lang
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.valueobjects.EMBG;
 
 import javax.persistence.*;
+import java.sql.Blob;
 import java.util.List;
 
 @Entity
@@ -24,6 +26,8 @@ public class Patient extends AbstractEntity<PatientId> {
     @JoinColumn(name = "user_id")
     private User user;
 
+    private byte[] profilePicture;
+
     private Patient() {
         super(PatientId.randomId(PatientId.class));
     }
@@ -34,10 +38,11 @@ public class Patient extends AbstractEntity<PatientId> {
         return patient;
     }
 
-    public static Patient change(Patient patient, String name, Gender gender, EMBG embg) {
+    public static Patient updatePatientProfile(Patient patient, String name, Gender gender, EMBG embg, byte[] profilePicture) {
         patient.name = name;
         patient.gender = gender;
         patient.embg = embg;
+        patient.profilePicture = profilePicture;
         return patient;
     }
 }

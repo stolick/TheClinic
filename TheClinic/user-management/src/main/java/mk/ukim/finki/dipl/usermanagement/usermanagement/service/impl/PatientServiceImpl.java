@@ -1,6 +1,7 @@
 package mk.ukim.finki.dipl.usermanagement.usermanagement.service.impl;
 
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.exceptions.PatientNotFoundException;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.Patient;
 import mk.ukim.finki.dipl.usermanagement.usermanagement.domain.models.PatientId;
@@ -11,6 +12,7 @@ import mk.ukim.finki.dipl.usermanagement.usermanagement.xport.dto.request.Patien
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -38,9 +40,13 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Patient updatePatient(PatientId patientId, PatientRequest patientRequest) {
+    public Patient updatePatientProfile(PatientId patientId, PatientRequest patientRequest) {
         Patient patient = patientRepository.findById(patientId).orElseThrow(PatientNotFoundException::new);
-        patient = Patient.change(patient, patientRequest.getName(), patientRequest.getGender(), patientRequest.getEmbg());
+        try {
+            patient = Patient.updatePatientProfile(patient, patientRequest.getName(), patientRequest.getGender(), patientRequest.getEmbg(), patientRequest.getProfilePicture().getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         patientRepository.save(patient);
         return patient;
     }

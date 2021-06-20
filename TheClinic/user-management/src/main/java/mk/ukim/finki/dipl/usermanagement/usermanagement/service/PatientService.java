@@ -13,6 +13,6 @@ public interface PatientService {
 
     Patient findById(PatientId patientId);
 
-    Patient updatePatient(PatientId patientId, PatientRequest patientRequest);
+    Patient updatePatientProfile(PatientId patientId, PatientRequest patientRequest);
 
 }
