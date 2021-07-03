@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StorageService } from './storage.service';
 import { Observable } from 'rxjs';
+import { Doctor } from '../models/doctor.interface';
 
 @Injectable()
 export class DoctorsService {
-  baseUrl = 'http://localhost:9091/api/doctor';
+  baseUrl = 'http://localhost:9090/api/doctor';
   headers: HttpHeaders;
 
   constructor(private _http: HttpClient,
@@ -17,20 +18,20 @@ export class DoctorsService {
   }
 
   getAll() {
-    return this._http.get(`${this.baseUrl}`, {headers: this.headers});
+    return this._http.get<Doctor[]>(`${this.baseUrl}`, {headers: this.headers});
   }
 
   findById(username: string){
     return this._http.get(`${this.baseUrl}/${username}`, {headers: this.headers});
   }
 
-  updateDoctor(doctorId, name, gender, languages, profilePicture){
+  updateDoctor(doctorId, updateDoctorForm){
     const formData = {
-      name: name,
-      languages: languages,
-      gender: gender,
-      profilePicture: profilePicture
+      name: updateDoctorForm.doctorName,
+      languages: updateDoctorForm.doctorLanguages,
+      gender: updateDoctorForm.doctorGender,
+      profilePicture: updateDoctorForm.image
     };
-    return this._http.post(`${this.baseUrl}/${doctorId}`, formData, {headers: this.headers});
+    return this._http.post<Doctor>(`${this.baseUrl}/${doctorId}`, formData, {headers: this.headers});
   }
 }

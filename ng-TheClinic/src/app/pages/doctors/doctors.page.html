@@ -1,3 +1,36 @@
-<div *ngFor="let d of doctors">
-  <div>{{d}}</div>
+<div class="row custom-header">
+  <div class="col-8">
+    <h4>Doctors</h4>
+  </div>
+  <div class="col-4">
+    Search may be here
+  </div>
 </div>
+<div class="row p-5">
+  <div *ngFor="let d of doctors" class="col-12 col-md-4 mx-auto my-5">
+    <div class="card testimonial-card mt-2 mb-3">
+      <div class="card-up aqua-gradient"></div>
+      <div class="avatar mx-auto white">
+        <img src="{{d.profilePicture}}" class="rounded-circle img-fluid"
+             alt="woman avatar">
+      </div>
+      <div class="card-body text-center">
+        <h4 class="card-title font-weight-bold"></h4>
+        {{d.name}}
+        <hr>
+        <div class="d-flex justify-content-between">
+          <div class="mx-2">
+            <span class="badge bg-light text-dark" *ngFor="let l of d.languages">{{l}}</span>
+          </div>
+          <div>
+            <span class="badge bg-danger">{{d.gender}}</span>
+          </div>
+        </div>
+        <div class="text-center">
+          <a href="slots/doctor/{{d.id.id}}" class="btn btn-link link-secondary p-md-1 m-2">See available slots</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

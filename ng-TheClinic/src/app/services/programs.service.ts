@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StorageService } from './storage.service';
+import { Program } from '../models/program.interface';
 
 @Injectable()
-export class DepartmentsService{
-  baseUrl = 'http://localhost:9090/api/department';
+export class ProgramsService{
+  baseUrl = 'http://localhost:9090/api/program';
   headers: HttpHeaders;
 
   constructor(private _http: HttpClient,
@@ -16,6 +17,7 @@ export class DepartmentsService{
   }
 
   getAll(){
-    return this._http.get(`${this.baseUrl}`)
+    return this._http.get<Program[]>(`${this.baseUrl}`, {headers: this.headers})
   }
+
 }

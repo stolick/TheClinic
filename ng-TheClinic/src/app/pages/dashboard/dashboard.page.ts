@@ -21,5 +21,6 @@ export class DashboardPage implements OnInit {
   logout(){
     this.storageService.removeItem('user');
     this.router.navigate(['login']);
+    window.location.reload();
   }
 }

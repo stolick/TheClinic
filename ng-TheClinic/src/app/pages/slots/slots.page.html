@@ -1,0 +1,47 @@
+<div class="p-5">
+  <mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate">
+  </mwl-demo-utils-calendar-header>
+
+  <div [ngSwitch]="view">
+    <mwl-calendar-month-view
+      *ngSwitchCase="'month'"
+      [viewDate]="viewDate"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      [events]="events"
+    >
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+      *ngSwitchCase="'week'"
+      [viewDate]="viewDate"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      [events]="events"
+    >
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view
+      *ngSwitchCase="'day'"
+      [viewDate]="viewDate"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      [events]="events"
+    >
+    </mwl-calendar-day-view>
+  </div>
+
+</div>
+<ng-template #modalContent let-close="close">
+  <div class="modal-header">
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      Event:
+      <pre>{{ modalData?.event | json }}</pre>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="close()">
+      OK
+    </button>
+  </div>
+</ng-template>

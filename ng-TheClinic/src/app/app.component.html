@@ -1,1 +1,20 @@
-<router-outlet></router-outlet>
+<div class="row">
+  <div *ngIf="currentUser" class="col-2 menu shadow justify-content-between">
+    <div>
+      <div class="greeting">{{this.greeting}}{{currentUser.username}}</div>
+      <div class="logo" (click)="goToDashboard(); selectedFragment = null;"><i class="fas fa-hospital-alt"></i> The Clinic</div>
+      <div (click)="selectedFragment = 'doctors'" routerLink='doctors' class="menu-item" [ngClass]="selectedFragment == 'doctors' ? 'selected-item' : ''"><i class="fas fa-user-md"></i> Doctors</div>
+      <div *ngIf="currentUser.roles[0] == 'ROLE_DOCTOR'"  (click)="selectedFragment = 'patient'" routerLink='patients' class="menu-item" [ngClass]="selectedFragment == 'patients' ? 'selected-item' : ''"><i class="fas fa-user-injured"></i> Patients</div>
+      <div (click)="selectedFragment = 'programs'" routerLink='programs' class="menu-item" [ngClass]="selectedFragment == 'programs' ? 'selected-item' : ''"><i class="fas fa-heartbeat"></i> Programs
+      </div>
+      <div *ngIf="currentUser.roles[0] == 'ROLE_DOCTOR'"  (click)="selectedFragment = 'work-schedule'" routerLink='work-schedule' class="menu-item" [ngClass]="selectedFragment == 'work-schedule' ? 'selected-item' : ''"><i class="fas fa-notes-medical"></i> Work Schedule</div>
+      <div (click)="selectedFragment = 'profile'" routerLink='profile' class="menu-item" [ngClass]="selectedFragment == 'profile' ? 'selected-item' : ''"><i class="fas fa-id-card-alt"></i> Profile</div>
+    </div>
+    <div>
+      <div (click)="logout()" class="menu-item"><i class="fas fa-sign-out-alt"></i> Logout</div>
+    </div>
+  </div>
+  <div class="col fragment">
+    <router-outlet></router-outlet>
+  </div>
+</div>

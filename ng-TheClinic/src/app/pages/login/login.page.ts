@@ -33,6 +33,7 @@ export class LoginPage implements OnInit{
           this.storageService.setItem('user', JSON.stringify(response));
           this.loginForm.reset();
           this.router.navigate(['dashboard'])
+          window.location.reload();
         })
       ).subscribe(_ => console.log(), error => {
         this.loginForm.reset()

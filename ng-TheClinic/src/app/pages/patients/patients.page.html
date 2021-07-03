@@ -1,0 +1,26 @@
+<div class="row custom-header">
+  <div class="col-8">
+    <h4>Patients</h4>
+  </div>
+  <div class="col-4">
+    Search may be here
+  </div>
+</div>
+<div class="row p-5">
+  <div *ngFor="let patient of patients" class="col-12 col-md-4 mx-auto my-5">
+    <div class="card testimonial-card mt-2 mb-3">
+      <div class="card-up aqua-gradient"></div>
+      <div class="avatar mx-auto white">
+        <img src="{{patient.profilePicture}}" class="rounded-circle img-fluid"
+             alt="woman avatar">
+      </div>
+      <div class="card-body text-center">
+        <h4 class="card-title font-weight-bold"></h4>
+        {{patient.name}}
+        <hr>
+        <button routerLink="../patient-records/{{patient.id.id}}" type="button" class="btn btn-deep-orange">Patient records</button>
+      </div>
+    </div>
+  </div>
+</div>
+
